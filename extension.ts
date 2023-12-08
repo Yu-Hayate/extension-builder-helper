@@ -36,30 +36,30 @@ game.onUpdate(function () {
     TotalRunTimeNum = game.runtime() + settings.readNumber("StartRunTime");
     settings.writeNumber("TotalRunTime", TotalRunTimeNum);
 })
-    //% block
+    //% block="Report Error $error"
     export function ReportError(error: String) {
         throw("Error: " + error)
     }
-    //% block
-    export function AttachDataToName(Name: String, info: any) {
-        index = Names.indexOf(Name)
+    //% block="Attatch $info to the name $name"
+    export function AttachDataToName(name: String, info: any) {
+        index = Names.indexOf(name)
         if (index == -1) {
             DataToName.push(info)
-            Names.push(Name)
+            Names.push(name)
         } else {
-            throw("the name \"" + Name + "\" is alredy in use")
+            throw("the name \"" + name + "\" is alredy in use")
         }
     }
-    //% block
-    export function GetDataFromName(Name: String) {
-        index = Names.indexOf(Name)
+    //% block="get the data Attatch to $name"
+    export function GetDataFromName(name: String) {
+        index = Names.indexOf(name)
         if (index != -1) {
             return DataToName[index]
         } else {
-            throw("the name \"" + Name + "\" does not exist")
+            throw("the name \"" + name + "\" does not exist")
         }
     }
-    //% block
+    //% block="$Value to hex "
     export function NumberToHexadecimal(Value: number): string {
 
         hexResult = "";
@@ -79,7 +79,7 @@ game.onUpdate(function () {
     export function TotalRunTime() {
         return TotalRunTimeNum
     }
-    //% block
+    //% block="$Value to Binary "
     export function NumberToBinary(Value: number): string {
         let binary = "";
         while (Value > 0) {
@@ -88,7 +88,7 @@ game.onUpdate(function () {
         }
         return binary;
     }
-    //% block
+    //% block="$Value To roman numerals"
     export function NumberToRomanNumerals(Value: number) {
         let String2 = "";
         while (Value != 0) {
@@ -98,12 +98,12 @@ game.onUpdate(function () {
         }
         return String2;
     }
-    //% block
+    //% block="round $Value to $DecimalsPoints decimal points"
     export function roundToDecimalPoint(Value: number, DecimalsPoints: number) {
         let factor = 10 ** DecimalsPoints
         return Math.round(Value * factor) / factor
     }
-    //% block
+    //% block="abbreviate $Value"
     export function abbreviateNumber(Value: number) {
         if (Value >= 1000) {
             let numlist = [
@@ -233,7 +233,7 @@ game.onUpdate(function () {
     export function convertStringToArray(String: string): any[] {
         return JSON.parse(String);
     }
-    //% block=""
+    //% block="Get Fibonacci number at index $index"
     export function GetFibonacciNumberAtIndex(index: number): number {
         let a = 0;
         let b = 1;
@@ -252,7 +252,7 @@ game.onUpdate(function () {
 
         return b;
     }
-    //% block
+    //% block="convert time from milliseconds to date. time$input"
     export function TimeInMSToTime(input: number): string {
         // Calculate the time values in seconds, minutes, hours, days, and years
         let seconds = Math.floor(input / 1000) % 60;
@@ -279,18 +279,18 @@ game.onUpdate(function () {
 
         return timeString;
     }
-    //% block
+    //% block="set seed to $seed"
     export function RNGsetSeed(seed: number) {
         RNGseed = seed % 10 ** 64
     }
-    //% block
+    //% block="Get random"
     export function RNGRandom() {
         RNGseed += 1 + Math.tan((RNGseed * 1.23456787654) ** 2)
         RNGseed = RNGseed % 10 ** 32
         out = (Math.sin(RNGseed * 2.4 + (RNGseed + 1.23 * Math.PI / 3)) + 1) / 2
         return out
     }
-    //% block
+    //% block="random integer Min$min Max$max"
     export function RNGRandomInt(min: number, max: number) {
         let range = max - min
         out = min + help.RNGRandom() * range
@@ -310,9 +310,10 @@ game.onUpdate(function () {
                 shuffleArray(arr[j]);
             }
         }
+        return arr
     }
 
-    //% block
+    //% block="Search $search from $list of strings"
     export function SherchStringArray(list: string[], search: string): string[] {
         let similarWords: string[] = [];
 
